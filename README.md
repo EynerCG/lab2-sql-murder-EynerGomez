@@ -33,28 +33,23 @@ Lo primero que hicimos fue localizar el reporte oficial del asesinato. En dicho 
 Segun el reporte inicial policial, el primer testigo residia en la casa con el **número más alto de la calle 
 Northwestern Dr.** por medio de esta consulta logramos identificar a la persona que describian. 
 
-Despues de visitar al primer testigo se pudo identificar la identidad de la persona
-
 ```
     SELECT * FROM interview
 	WHERE person_id = 14887;
 ```
 ![Primeras Pistas Obtenidas](evidencia/2.Primeras_Pistas_testigo1.png)
 
-se procedio a revisar su entrevista y comprobamos que tiene una entrevista registrada, logramos apreciar su testimonio en donde obtuvimos informacion clave sobre el sospechoso como: tenia una bolsa de un gimnasio "Get Fit Now Gym", tiene membresia de oro y empieza por "48Z" y subio a un coche con matricula que tenia los caracteres H42W
+Se procedió a revisar la entrevista del testigo, confirmando que cuenta con una declaración registrada en el sistema. Al analizar su testimonio, se logró obtener información clave sobre el sospechoso.
+El testigo manifestó que el individuo portaba una bolsa del gimnasio "Get Fit Now Gym", que posee una membresía de tipo oro cuya identificación inicia con los caracteres "48Z", y que posteriormente abordó un vehículo cuya placa contenía los caracteres "H42W".
 
 
-El reporte policial menciona a una segunda testigo llamada Annabel residente de Franklin Ave.
-
+De acuerdo con el reporte policial, se identificó la existencia de una segunda testigo, identificada como Annabel, quien reside en Franklin Ave, por lo que se procedió a ubicar su registro con el fin de obtener información adicional relacionada con el caso.
 ```
     SELECT * FROM person
     WHERE address_street_name = 'Franklin Ave' AND name LIKE '%Annabel%';
 ```
 
-Podemos apreciar que al buscar la informacion de Annabel logramos conocer su ID que nos va a permitir conocer el testimonio que brindo a la policia para asi obtener mas pistas del asesino.
-
-
-Nos dirigimos a revisar la entrevista que se le realizo a la testigo Annabel 
+Comprobamos la identificacion de Annabel y le realizamos un par de preguntas.
 
 ```
     SELECT * FROM interview 
@@ -63,16 +58,18 @@ Nos dirigimos a revisar la entrevista que se le realizo a la testigo Annabel
 ```
 ![Segundas Pistas Obtenidas Del Segundo Testigo](evidencia/3.Segundas_Pistas_testigo2.png)
 
-se obtuvo informacion demasiado importante porque logro identificar al asesino  dias antes de que cometiera el homicidio en el gimnasio Get Fit Now y esto nos permite enfocar todas nuestras fuerzas en investigar los registros del gimnasio el dia 9 de enero y que sean membresia oro.
+El testimonio de la testigo resultó ser de gran relevancia para la investigación, ya que manifestó haber reconocido al sospechoso debido a que días antes del homicidio lo había visto asistiendo al gimnasio "Get Fit Now Gym", lugar que ella también frecuenta.
 
-Con las pistas reunidas a partir de los dos testimonios tenemos la siguiente informacion:
+Este dato permitió orientar la investigación hacia los registros de asistencia del gimnasio, específicamente los correspondientes al día 9 de enero, enfocando la búsqueda en personas que posean membresía de tipo oro, con el fin de identificar posibles coincidencias con la descripción proporcionada del sospechoso.
 
-1. Es **Masculino**
-2. Tiene **membresia de oro** en el **gym  Get FitNow**
-3. Habia ingresado al gimnasio el **dia 9 de enero de 2018**
-4. su **vehiculo** tiene **placa** que contenia **H42W** 
-5. por ultimo pero no menos importante su **ID de membresia empieza por 48Z**
+Con base en las pistas recopiladas a partir de los testimonios obtenidos durante la investigación, se logró consolidar la siguiente información sobre el principal sospechoso:
 
+1. Se trata de un individuo de sexo masculino.
+2. Posee membresía de tipo oro en el gimnasio "Get Fit Now Gym".
+3. Se registró su ingreso al gimnasio el día 9 de enero de 2018.
+4. El vehículo que utilizaba presentaba una placa que contenía los caracteres "H42W".
+5. El identificador de su membresía en el gimnasio inicia con los caracteres "48Z".
+   
 ```
     SELECT *
     FROM get_fit_now_member G
@@ -88,7 +85,7 @@ Con las pistas reunidas a partir de los dos testimonios tenemos la siguiente inf
 ```
 ![Sospechoso Principal](evidencia/4.Sospechoso_Principal.png)
 
-logramos identificar el principal sospechoso Jeremy Bowers que teniendo en cuenta las investigaciones previas y las caracteristicas dadas es el unico que coinciden ahora buscamos llamarlo para obtener su testimonio:
+logramos identificar el principal sospechoso Jeremy Bowers que teniendo en cuenta las investigaciones previas y las caracteristicas dadas es el unico que coinciden ahora buscamos llamarlo para obtener sus declaraciones :
 
 ```
  SELECT p.name, i.*
@@ -99,7 +96,8 @@ logramos identificar el principal sospechoso Jeremy Bowers que teniendo en cuent
 ```
 ![Confesion del asesino y nos brindo pistas de quien lo contrato](evidencia/5.Confesion_Asesino.png)
 
-Después de analizar su testimonio, logramos identificar y capturar al autor material del asesinato ocurrido el 15 de enero de 2018 fue Jeremy Bowers. Sin embargo, durante el interrogatorio también confesó información clave sobre la persona que lo contrató para cometer el fatídico crimen, proporcionando detalles sobre sus características físicas y algunos de los lugares que asistio.
+Después de analizar las declaraciones obtenidas durante la investigación, se logró identificar y capturar al autor material del asesinato ocurrido el 15 de enero de 2018, siendo este Jeremy Bowers.
+Durante el proceso de interrogatorio, el detenido confesó información adicional de gran relevancia para el caso, señalando que había sido contratado por otra persona para cometer el crimen. Asimismo, proporcionó detalles sobre las características físicas de quien lo contrató, así como información sobre algunos de los lugares asistio, lo que permitió ampliar la línea de investigación para identificar al autor intelectual del homicidio.
 
 ![Captura y Confesion del actor material](evidencia/6.Captura_Autor_Material.png)
 
@@ -120,7 +118,7 @@ Después de analizar su testimonio, logramos identificar y capturar al autor mat
 ```
 ![Principal y unica sospechosa de ser la autora intelectual](evidencia/7.Sospechoso_Autor_Intelectual.png)
 
-El resultado de esta consulta reveló el nombre de la persona que cumplía con todas las características descritas: Miranda Priestly, quien fue identificada como la autora intelectual del crimen.
+El resultado de la consulta realizada permitió identificar a la persona que cumplía con todas las características previamente descritas. Dicho análisis condujo a Miranda Priestly, quien fue posteriormente identificada como la autora intelectual del crimen.
 
 ![Captura y Confesion del actor intelectual](evidencia/8.Captura_Autor_Intelectual.png)
 
