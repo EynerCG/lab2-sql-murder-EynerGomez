@@ -35,10 +35,10 @@ Northwestern Dr.** por medio de esta consulta logramos identificar a la persona 
 
 Despues de visitar al primer testigo se pudo identificar la identidad de la persona
 
-´´´
+```
     SELECT * FROM interview
 	WHERE person_id = 14887;
-´´´
+```
 ![Primeras Pistas Obtenidas](evidencia/2.Primeras_Pistas_testigo1.png)
 
 se procedio a revisar su entrevista y comprobamos que tiene una entrevista registrada, logramos apreciar su testimonio en donde obtuvimos informacion clave sobre el sospechoso como: tenia una bolsa de un gimnasio "Get Fit Now Gym", tiene membresia de oro y empieza por "48Z" y subio a un coche con matricula que tenia los caracteres H42W
@@ -46,21 +46,21 @@ se procedio a revisar su entrevista y comprobamos que tiene una entrevista regis
 
 El reporte policial menciona a una segunda testigo llamada Annabel residente de Franklin Ave.
 
-´´´
+```
     SELECT * FROM person
     WHERE address_street_name = 'Franklin Ave' AND name LIKE '%Annabel%';
-´´´
+```
 
 Podemos apreciar que al buscar la informacion de Annabel logramos conocer su ID que nos va a permitir conocer el testimonio que brindo a la policia para asi obtener mas pistas del asesino.
 
 
 Nos dirigimos a revisar la entrevista que se le realizo a la testigo Annabel 
 
-´´´
+```
     SELECT * FROM interview 
     WHERE person_id = 16371;
 
-´´´
+```
 ![Segundas Pistas Obtenidas Del Segundo Testigo](evidencia/3.Segundas_Pistas_testigo2.png)
 
 se obtuvo informacion demasiado importante porque logro identificar al asesino  dias antes de que cometiera el homicidio en el gimnasio Get Fit Now y esto nos permite enfocar todas nuestras fuerzas en investigar los registros del gimnasio el dia 9 de enero y que sean membresia oro.
@@ -73,7 +73,7 @@ Con las pistas reunidas a partir de los dos testimonios tenemos la siguiente inf
 4. su **vehiculo** tiene **placa** que contenia **H42W** 
 5. por ultimo pero no menos importante su **ID de membresia empieza por 48Z**
 
-´´´
+```
     SELECT *
     FROM get_fit_now_member G
     INNER JOIN get_fit_now_check_in C ON G.id = C.membership_id
@@ -85,25 +85,25 @@ Con las pistas reunidas a partir de los dos testimonios tenemos la siguiente inf
     AND L.gender = 'male'
     AND L.plate_number LIKE '%H42W%'
 
-´´´
+```
 ![Sospechoso Principal](evidencia/4.Sospechoso_Principal.png)
 
 logramos identificar el principal sospechoso Jeremy Bowers que teniendo en cuenta las investigaciones previas y las caracteristicas dadas es el unico que coinciden ahora buscamos llamarlo para obtener su testimonio:
 
-´´´
+```
  SELECT p.name, i.*
     FROM interview i
     JOIN person p ON i.person_id = p.id
     WHERE i.person_id IN (67318);
 
-´´´
+```
 ![Confesion del asesino y nos brindo pistas de quien lo contrato](evidencia/5.Confesion_Asesino.png)
 
 Después de analizar su testimonio, logramos identificar y capturar al autor material del asesinato ocurrido el 15 de enero de 2018 fue Jeremy Bowers. Sin embargo, durante el interrogatorio también confesó información clave sobre la persona que lo contrató para cometer el fatídico crimen, proporcionando detalles sobre sus características físicas y algunos de los lugares que asistio.
 
 ![Captura y Confesion del actor material](evidencia/6.Captura_Autor_Material.png)
 
-´´´
+```
     SELECT p.name
     FROM person p
     JOIN drivers_license dl ON p.license_id = dl.id
@@ -117,7 +117,7 @@ Después de analizar su testimonio, logramos identificar y capturar al autor mat
     GROUP BY p.name
     HAVING COUNT(*) = 3;
 
-´´´
+```
 ![Principal y unica sospechosa de ser la autora intelectual](evidencia/7.Sospechoso_Autor_Intelectual.png)
 
 El resultado de esta consulta reveló el nombre de la persona que cumplía con todas las características descritas: Miranda Priestly, quien fue identificada como la autora intelectual del crimen.
