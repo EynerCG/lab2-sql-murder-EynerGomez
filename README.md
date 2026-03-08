@@ -39,7 +39,7 @@ Despues de visitar al primer testigo se pudo identificar la identidad de la pers
     SELECT * FROM interview
 	WHERE person_id = 14887;
 ´´´
-![Primeras Pistas Obtenidas](evidencia/2.Primeras_Pistas.png)
+![Primeras Pistas Obtenidas](evidencia/2.Primeras_Pistas_testigo1.png)
 
 se procedio a revisar su entrevista y comprobamos que tiene una entrevista registrada, logramos apreciar su testimonio en donde obtuvimos informacion clave sobre el sospechoso como: tenia una bolsa de un gimnasio "Get Fit Now Gym", tiene membresia de oro y empieza por "48Z" y subio a un coche con matricula que tenia los caracteres H42W
 
